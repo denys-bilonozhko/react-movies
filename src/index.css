@@ -24,6 +24,10 @@ body,
   flex-direction: column;
 }
 
+header {
+  margin-bottom: 30px;
+}
+
 .main {
   flex: 1 1 auto;
 }
@@ -49,7 +53,7 @@ body,
 
 .card-image img {
   height: 100%;
-  
+  object-fit: contain;
 }
 
 .card-content {
@@ -61,4 +65,9 @@ body,
 
 .card-title {
   text-align: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
 }
