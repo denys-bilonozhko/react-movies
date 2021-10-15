@@ -7,9 +7,10 @@ import Search from './components/search/Search';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=7b9ce72f&s=${'star wars'}`)
+    fetch(`https://www.omdbapi.com/?apikey=7b9ce72f&s=${'star wars'}`)
       .then((response) => response.json())
       .then((data) => {
         setMovies(data.Search);
@@ -17,9 +18,11 @@ const App = () => {
   }, []);
 
   const searchMovie = (str) => {
-    fetch(`http://www.omdbapi.com/?apikey=7b9ce72f&s=${str}`)
+    setLoading(true);
+    fetch(`https://www.omdbapi.com/?apikey=7b9ce72f&s=${str}`)
       .then((response) => response.json())
       .then((data) => setMovies(data.Search));
+    setLoading(false);
   };
 
   return (
@@ -27,7 +30,7 @@ const App = () => {
       <Header />
       <Search searchMovie={searchMovie} />
       <main className="main">
-        {movies.length ? (
+        {!loading ? (
           <Movies movies={movies} />
         ) : (
           <p className="center">Loading...</p>
